@@ -108,3 +108,6 @@ venv.bak/
 
 # PCI IDs database
 pci.ids
+
+# Header
+pcil.h
