@@ -46,26 +46,39 @@ if __name__ == '__main__':
 
 namespace pcil
 {
-    static const std::map<short, char*> names = {
+    typedef std::map<uint32_t, const char*> table;
+    
+    static table create_map()
+    {
+        table m;
 """)
         with open(os.path.join(os.path.dirname(__file__), "pci.ids"), "r", encoding="utf8") as pcifile:
-            lines = pcifile.readlines()
-            last = lines[-1]
             i = 0
-            for line in lines:
+            for line in pcifile:
                 if line.startswith("#") or line.isspace():
                     continue
-                if line != last:
-                    headerfile.write("        {{{id}, \"{name}\"}},\n".format(id=i, name=line.strip().replace("\\", "\\\\").replace("\"", "\\\"")))
-                else:
-                    headerfile.write("        {{{id}, \"{name}\"}}".format(id=i, name=line.strip().replace("\\", "\\\\").replace("\"", "\\\"")))
+                vendorId = int("03E8", 16)
+                deviceId = i
+                key = ((vendorId << 16) | deviceId)
+                headerfile.write("        m[{key}] = \"{name}\";\n".format(key=key, name=line.strip().replace("\\", "\\\\").replace("\"", "\\\"")))
                 i += 1
-        headerfile.write("""
-    };
+        headerfile.write("""        return m;
+    }
     
-    inline const char* lookup(short vendorId, short deviceId)
+    static const table names = create_map();
+    
+    inline const char* lookup(uint16_t vendorId, uint16_t deviceId)
     {
-        return names[vendorId];
+        uint32_t key = ((vendorId << 16) | (deviceId));
+
+        if(names.count(key))
+        {
+            return names.at(key);
+        }
+        else
+        {
+            return "Unrecognized device";
+        }
     }
 }
 #endif // PCIL_H
