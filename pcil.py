@@ -41,19 +41,16 @@ if __name__ == '__main__':
     with open(path, "w", encoding="utf8") as headerfile:
         headerfile.write("""#ifndef PCIL_H
 #define PCIL_H
-#include <map>
 
 namespace pcil
 {
-    typedef std::map<uint32_t, const char*> uint32Table_t;
-    typedef std::map<uint16_t, const char*> uint16Table_t;
-    
-    static uint32Table_t create_devices_map()
+    inline const char* deviceLookup(uint16_t vendorId, uint16_t deviceId)
     {
-        uint32Table_t m;
+        uint32_t key = ((vendorId << 16) | (deviceId));
+        switch(key)
+        {
 """)
         with open(os.path.join(os.path.dirname(__file__), "pci.ids"), "r", encoding="utf8") as pcifile:
-            i = 0
             for line in pcifile:
                 if line.startswith("C "):
                     break
@@ -66,47 +63,20 @@ namespace pcil
                     continue
                 elif len(line) - len(line.lstrip('\t')) == 1:
                     deviceId = int(s[0], 16)
-                key = ((vendorId << 16) | deviceId)
-                headerfile.write("        m[{key}] = \"{name}\";\n".format(key=key, name=s[1].strip().replace("\\", "\\\\").replace("\"", "\\\"")))
-                i += 1
-        headerfile.write("""        return m;
-    }
-    
-    static uint16Table_t create_vendors_map()
-    {
-        uint16Table_t m;
-""")
-        for vendor in vendors:
-            headerfile.write("        m[{key}] = \"{name}\";\n".format(key=vendor[0], name=vendor[1].strip().replace("\\", "\\\\").replace("\"", "\\\"")))
-        headerfile.write("""        return m;
-    }
-    
-    static const uint32Table_t devices = create_devices_map();
-    static const uint16Table_t vendors = create_vendors_map();
-    
-    inline const char* deviceLookup(uint16_t vendorId, uint16_t deviceId)
-    {
-        uint32_t key = ((vendorId << 16) | (deviceId));
-
-        if(devices.count(key))
-        {
-            return devices.at(key);
-        }
-        else
-        {
-            return "Unrecognized device";
+                    key = ((vendorId << 16) | deviceId)
+                    headerfile.write("            case {key}: return \"{name}\";\n".format(key=key, name=s[1].strip().replace("\\", "\\\\").replace("\"", "\\\"")))
+        headerfile.write("""            default: return "Unrecognized Device";
         }
     }
     
     inline const char* vendorLookup(uint16_t vendorId)
     {
-        if(vendors.count(vendorId))
+        switch(vendorId)
         {
-            return vendors.at(vendorId);
-        }
-        else
-        {
-            return "Unrecognized vendor";
+""")
+        for vendor in vendors:
+            headerfile.write("            case {key}: return \"{name}\";\n".format(key=vendor[0], name=vendor[1].strip().replace("\\", "\\\\").replace("\"", "\\\"")))
+        headerfile.write("""            default: return "Unrecognized Vendor";
         }
     }
 }
