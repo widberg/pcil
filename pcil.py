@@ -1,11 +1,37 @@
+# MIT License
+#
+# Copyright (c) 2018 ProWolf
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+#
+# https://github.com/prowolf/pcil
+
 from argparse import ArgumentParser
 from urllib.request import urlretrieve
 import sys
 import os
 
 parser = ArgumentParser()
-parser.add_argument("-o", "--out", dest="path", default="pcil.h",
-                    help="Path to output the header file", metavar="PATH")
+parser.add_argument("-i", "--in", dest="pci_path", default="pci.ids",
+                    help="path to output the header file", metavar="PATH")
+parser.add_argument("-o", "--out", dest="header_path", default="pcil.h",
+                    help="path to output the header file", metavar="PATH")
 parser.add_argument("-q", "--quiet", action="store_true", dest="quiet",
                     default=False, help="don't print status messages to stdout")
 parser.add_argument("-u", "--url", dest="url",
@@ -29,17 +55,45 @@ def reporthook(blocknum, blocksize, totalsize):
 
 
 if __name__ == '__main__':
-    path = os.path.join(os.path.dirname(__file__), args.path)
-    os.makedirs(os.path.dirname(path), exist_ok=True)
+    pci_path = os.path.join(os.path.dirname(__file__), args.pci_path)
+    os.makedirs(os.path.dirname(pci_path), exist_ok=True)
+    header_path = os.path.join(os.path.dirname(__file__), args.header_path)
+    os.makedirs(os.path.dirname(header_path), exist_ok=True)
     if args.url:
         if args.quiet:
-            urlretrieve(args.url, 'pci.ids')
+            urlretrieve(args.url, pci_path)
         else:
             print("Downloading id database from " + args.url)
-            urlretrieve(args.url, 'pci.ids', reporthook)
+            urlretrieve(args.url, pci_path, reporthook)
             print("Download complete")
-    with open(path, "w", encoding="utf8") as headerfile:
-        headerfile.write("""#ifndef PCIL_H
+    with open(header_path, "w", encoding="utf8") as header_file:
+        header_file.write("""// MIT License
+//
+// Copyright (c) 2018 ProWolf
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+//
+// This file was generated with a script.
+// This header was generated with pcil v0.5.0
+// https://github.com/prowolf/pcil
+
+#ifndef PCIL_H
 #define PCIL_H
 
 namespace pcil
@@ -50,22 +104,23 @@ namespace pcil
         switch(key)
         {
 """)
-        with open(os.path.join(os.path.dirname(__file__), "pci.ids"), "r", encoding="utf8") as pcifile:
-            for line in pcifile:
-                if line.startswith("C "):
+        with open(os.path.join(os.path.dirname(__file__), pci_path), "r", encoding="utf8") as pci_file:
+            vendorId = 0
+            for line in pci_file:
+                if line.startswith("#") or line.isspace():
+                    continue
+                elif line.startswith("C "):
                     break
-                elif line.startswith("#") or line.isspace():
-                    continue
-                s = line.split("  ")
-                if len(line) - len(line.lstrip('\t')) == 0:
-                    vendorId = int(s[0], 16)
-                    vendors.append([vendorId, s[1]])
-                    continue
-                elif len(line) - len(line.lstrip('\t')) == 1:
-                    deviceId = int(s[0], 16)
-                    key = ((vendorId << 16) | deviceId)
-                    headerfile.write("            case {key}: return \"{name}\";\n".format(key=key, name=s[1].strip().replace("\\", "\\\\").replace("\"", "\\\"")))
-        headerfile.write("""            default: return "Unrecognized Device";
+                else:
+                    s = line.split("  ")
+                    if len(line) - len(line.lstrip('\t')) == 0:
+                        vendorId = int(s[0], 16)
+                        vendors.append([vendorId, s[1]])
+                    elif len(line) - len(line.lstrip('\t')) == 1:
+                        deviceId = int(s[0], 16)
+                        key = ((vendorId << 16) | deviceId)
+                        header_file.write("            case {key}: return \"{name}\";\n".format(key=key, name=s[1].strip().replace("\\", "\\\\").replace("\"", "\\\"")))
+        header_file.write("""            default: return "Unrecognized Device";
         }
     }
     
@@ -75,12 +130,12 @@ namespace pcil
         {
 """)
         for vendor in vendors:
-            headerfile.write("            case {key}: return \"{name}\";\n".format(key=vendor[0], name=vendor[1].strip().replace("\\", "\\\\").replace("\"", "\\\"")))
-        headerfile.write("""            default: return "Unrecognized Vendor";
+            header_file.write("            case {key}: return \"{name}\";\n".format(key=vendor[0], name=vendor[1].strip().replace("\\", "\\\\").replace("\"", "\\\"")))
+        header_file.write("""            default: return "Unrecognized Vendor";
         }
     }
 }
 #endif // PCIL_H
 """)
     if not args.quiet:
-        print("The header file is located at " + path.replace("\\", "/"))
+        print("The header file is located at " + header_path.replace("\\", "/"))
