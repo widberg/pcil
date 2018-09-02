@@ -109,17 +109,18 @@ namespace pcil
         with open(os.path.join(os.path.dirname(__file__), pci_path), "r", encoding="utf8") as pci_file:
             vendorId = 0
             for line in pci_file:
-                if not line.startswith("#") and not line.isspace() and not line.startswith("C "):
-                    s = line.split("  ")
-                    if len(line) - len(line.lstrip('\t')) == 0:
-                        vendorId = int(s[0], 16)
-                        vendors.append([vendorId, s[1]])
-                    elif len(line) - len(line.lstrip('\t')) == 1:
-                        deviceId = int(s[0], 16)
-                        key = ((vendorId << 16) | deviceId)
-                        header_file.write("            case {key}: return \"{name}\";\n".format(key=key, name=s[1].strip().replace("\\", "\\\\").replace("\"", "\\\"")))
-                elif line.startswith("C "):
-                    break
+                if not line.startswith("#") and not line.isspace():
+                    if not line.startswith("C "):
+                        s = line.split("  ")
+                        if len(line) - len(line.lstrip('\t')) == 0:
+                            vendorId = int(s[0], 16)
+                            vendors.append([vendorId, s[1]])
+                        elif len(line) - len(line.lstrip('\t')) == 1:
+                            deviceId = int(s[0], 16)
+                            key = ((vendorId << 16) | deviceId)
+                            header_file.write("            case {key}: return \"{name}\";\n".format(key=key, name=s[1].strip().replace("\\", "\\\\").replace("\"", "\\\"")))
+                    else:
+                        break
         header_file.write("""            default: return "Unrecognized Device";
         }
     }
