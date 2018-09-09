@@ -29,10 +29,9 @@
 
 namespace pcil
 {
-    inline const char* deviceLookup(uint16_t vendorId, uint16_t deviceId)
+    inline constexpr const char* deviceLookup(uint16_t vendorId, uint16_t deviceId)
     {
-        uint32_t key = ((vendorId << 16) | (deviceId));
-        switch(key)
+        switch((vendorId << 16) | (deviceId))
         {
             case 1081657: return "AT-2500TX V3 Ethernet";
             case 1341952: return "Hyper Transport Bridge Controller";
@@ -809,7 +808,7 @@ namespace pcil
             case 268593255: return "Vega 10 XL [Radeon Pro Vega 56]";
             case 268593256: return "Vega 10 [Radeon PRO WX 8100]";
             case 268593260: return "Vega 10 [Radeon Instinct MI25 MxGPU]";
-            case 268593279: return "Vega 10 XT [Radeon RX Vega 64]";
+            case 268593279: return "Vega 10 XL/XT [Radeon RX Vega 56/64]";
             case 268593280: return "Lexington [Radeon HD 6550M]";
             case 268593288: return "Cypress XT [FirePro V8800]";
             case 268593289: return "Cypress PRO [FirePro V7800]";
@@ -1427,6 +1426,7 @@ namespace pcil
             case 269747164: return "POWER8 Host Bridge (PHB3)";
             case 269747275: return "GenWQE Accelerator Adapter";
             case 269747370: return "Flash Adapter 90 (PCIe2 0.9TB)";
+            case 269747393: return "POWER9 Host Bridge (PHB4)";
             case 269747418: return "PCI-E IPR SAS+ Adapter (ASIC)";
             case 269747437: return "Internal Shared Memory (ISM) virtual PCI device";
             case 269758498: return "QLA3022 Network Adapter";
@@ -4260,6 +4260,7 @@ namespace pcil
             case 282985487: return "G84GL [Quadro FX 1700]";
             case 282985488: return "G92 [GeForce GT 330]";
             case 282985492: return "G92 [GeForce 9800 GT]";
+            case 282985496: return "G92 [GeForce GT 330 OEM]";
             case 282985504: return "G86 [GeForce 8400 SE]";
             case 282985505: return "G86 [GeForce 8500 GT]";
             case 282985506: return "G86 [GeForce 8400 GS]";
@@ -4773,6 +4774,7 @@ namespace pcil
             case 282988464: return "GM200 High Definition Audio";
             case 282988472: return "GP108 High Definition Audio Controller";
             case 282988473: return "GP107GL High Definition Audio Controller";
+            case 282988474: return "GM206 High Definition Audio Controller";
             case 282988475: return "GM204 High Definition Audio Controller";
             case 282988480: return "GK107 [GeForce GT 640 OEM]";
             case 282988481: return "GK107 [GeForce GT 640]";
@@ -5018,7 +5020,7 @@ namespace pcil
             case 282989458: return "GM107M [GeForce GTX 860M]";
             case 282989459: return "GM107M [GeForce 840M]";
             case 282989464: return "GM107M [GeForce 845M]";
-            case 282989465: return "NVIDIA GeForce 945M";
+            case 282989465: return "GM107M [GeForce 945M]";
             case 282989466: return "GM107M [GeForce GTX 950M]";
             case 282989467: return "GM107M [GeForce GTX 960M]";
             case 282989468: return "GM107M [GeForce 940M]";
@@ -9511,6 +9513,7 @@ namespace pcil
             case 396390755: return "GL9701 PCIe to PCI Bridge";
             case 396394627: return "GL880 USB 1.1 UHCI controller";
             case 396394628: return "GL880 USB 2.0 EHCI controller";
+            case 396400464: return "GL9750 SD Host Controller";
             case 397033515: return "Intel 82599ES 10Gb 2-port Server Adapter X520-2";
             case 397650696: return "PN672TX 10/100 Ethernet";
             case 397672465: return "WebEnhance 100 GZIP Compression Card";
@@ -10021,6 +10024,7 @@ namespace pcil
             case 434479672: return "HiSilicon USB 3.0 Host Controller";
             case 434479673: return "HiSilicon USB 2.0 2-port Host Controller";
             case 434479674: return "HiSilicon USB 2.0 Host Controller";
+            case 434479675: return "HiSilicon USB 1.1 Host Controller";
             case 434479696: return "HiSilicon ZIP Engine";
             case 434479697: return "HiSilicon ZIP Engine(Virtual Function)";
             case 434479701: return "HiSilicon SEC Engine";
@@ -12398,7 +12402,7 @@ namespace pcil
             case 2156275355: return "631xESB/632xESB/3100 Chipset SMBus Controller";
             case 2156275358: return "631xESB/632xESB IDE Controller";
             case 2156275456: return "Optane SSD 900P Series";
-            case 2156275457: return "Optane DC P4800X Series SSD";
+            case 2156275457: return "NVMe Datacenter SSD [Optane]";
             case 2156275568: return "82945G/GZ/P/PL Memory Controller Hub";
             case 2156275569: return "82945G/GZ/P/PL PCI Express Root Port";
             case 2156275570: return "82945G/GZ Integrated Graphics Controller";
@@ -13381,6 +13385,7 @@ namespace pcil
             case 2156281489: return "8th Gen Core Processor Gaussian Mixture Model";
             case 2156281490: return "UHD Graphics 630 (Desktop)";
             case 2156281499: return "UHD Graphics 630 (Mobile)";
+            case 2156281504: return "UHD Graphics 620 (Whiskey Lake)";
             case 2156281509: return "Iris Plus Graphics 655";
             case 2156281538: return "8th Gen Core Processor Host Bridge/DRAM Registers";
             case 2156281540: return "8th Gen Core Processor Host Bridge/DRAM Registers";
@@ -14822,7 +14827,7 @@ namespace pcil
         }
     }
     
-    inline const char* vendorLookup(uint16_t vendorId)
+    inline constexpr const char* vendorLookup(uint16_t vendorId)
     {
         switch(vendorId)
         {

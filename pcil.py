@@ -100,10 +100,9 @@ if __name__ == '__main__':
 
 namespace pcil
 {
-    inline const char* deviceLookup(uint16_t vendorId, uint16_t deviceId)
+    inline constexpr const char* deviceLookup(uint16_t vendorId, uint16_t deviceId)
     {
-        uint32_t key = ((vendorId << 16) | (deviceId));
-        switch(key)
+        switch((vendorId << 16) | (deviceId))
         {
 """)
         with open(os.path.join(os.path.dirname(__file__), pci_path), "r", encoding="utf8") as pci_file:
@@ -125,7 +124,7 @@ namespace pcil
         }
     }
     
-    inline const char* vendorLookup(uint16_t vendorId)
+    inline constexpr const char* vendorLookup(uint16_t vendorId)
     {
         switch(vendorId)
         {
