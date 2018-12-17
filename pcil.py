@@ -31,7 +31,7 @@ import os
 parser = ArgumentParser()
 parser.add_argument("-i", "--in", dest="pci_path", default="pci.ids",
                     help="path to output the header file", metavar="PATH")
-parser.add_argument("-o", "--out", dest="header_path", default="pcil.h",
+parser.add_argument("-o", "--out", dest="header_path", default="include/pcil/pcil.hpp",
                     help="path to output the header file", metavar="PATH")
 parser.add_argument("-q", "--quiet", action="store_true", dest="quiet",
                     default=False, help="don't print status messages to stdout")
@@ -98,9 +98,11 @@ if __name__ == '__main__':
 #ifndef PCIL_H
 #define PCIL_H
 
+#include <cstdint>
+
 namespace pcil
 {
-    inline constexpr const char* deviceLookup(uint16_t vendorId, uint16_t deviceId)
+    inline constexpr const char* deviceLookup(std::uint16_t vendorId, std::uint16_t deviceId)
     {
         switch((vendorId << 16) | (deviceId))
         {
@@ -124,7 +126,7 @@ namespace pcil
         }
     }
     
-    inline constexpr const char* vendorLookup(uint16_t vendorId)
+    inline constexpr const char* vendorLookup(std::uint16_t vendorId)
     {
         switch(vendorId)
         {

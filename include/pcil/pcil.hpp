@@ -27,9 +27,11 @@
 #ifndef PCIL_H
 #define PCIL_H
 
+#include <cstdint>
+
 namespace pcil
 {
-    inline constexpr const char* deviceLookup(uint16_t vendorId, uint16_t deviceId)
+    inline constexpr const char* deviceLookup(std::uint16_t vendorId, std::uint16_t deviceId)
     {
         switch((vendorId << 16) | (deviceId))
         {
@@ -265,6 +267,14 @@ namespace pcil
             case 268435664: return "SAS3716 Fusion-MPT Tri-Mode RAID Controller Chip (ROC)";
             case 268435665: return "SAS3616 Fusion-MPT Tri-Mode I/O Controller Chip (IOC)";
             case 268435667: return "MegaRAID Tri-Mode SAS3716W";
+            case 268435680: return "Fusion-MPT 12GSAS/PCIe Unsupported SAS39xx";
+            case 268435681: return "Fusion-MPT 12GSAS/PCIe SAS39xx";
+            case 268435682: return "Fusion-MPT 12GSAS/PCIe Secure SAS39xx";
+            case 268435683: return "Fusion-MPT 12GSAS/PCIe Unsupported SAS39xx";
+            case 268435684: return "Fusion-MPT 12GSAS/PCIe Unsupported SAS38xx";
+            case 268435685: return "Fusion-MPT 12GSAS/PCIe SAS38xx";
+            case 268435686: return "Fusion-MPT 12GSAS/PCIe Secure SAS38xx";
+            case 268435687: return "Fusion-MPT 12GSAS/PCIe Unsupported SAS38xx";
             case 268436144: return "Virtual Endpoint on PCIe Switch";
             case 268436145: return "Virtual Endpoint on PCIe Switch (9749)";
             case 268436487: return "MegaRAID";
@@ -292,6 +302,14 @@ namespace pcil
             case 268437511: return "SA2020ZC";
             case 268437761: return "61C102";
             case 268439552: return "63C815";
+            case 268439776: return "MegaRAID 12GSAS/PCIe Unsupported SAS39xx";
+            case 268439777: return "MegaRAID 12GSAS/PCIe SAS39xx";
+            case 268439778: return "MegaRAID 12GSAS/PCIe Secure SAS39xx";
+            case 268439779: return "MegaRAID 12GSAS/PCIe Unsupported SAS39xx";
+            case 268439780: return "MegaRAID 12GSAS/PCIe Unsupported SAS38xx";
+            case 268439781: return "MegaRAID 12GSAS/PCIe SAS38xx";
+            case 268439782: return "MegaRAID 12GSAS/PCIe Secure SAS38xx";
+            case 268439783: return "MegaRAID 12GSAS/PCIe Unsupported SAS38xx";
             case 268441952: return "MegaRAID";
             case 268447824: return "SAS2008 PCI-Express Fusion-MPT SAS-2";
             case 268460033: return "DX1 Multiformat Broadcast HD/SD Encoder/Decoder";
@@ -672,7 +690,7 @@ namespace pcil
             case 268592704: return "Saturn XT [FirePro M6100]";
             case 268592705: return "Saturn PRO [Radeon HD 8930M]";
             case 268592710: return "Bonaire XT [Radeon R9 M280X]";
-            case 268592711: return "Bonaire PRO [Radeon R9 M270X]";
+            case 268592711: return "Saturn PRO/XT [Radeon R9 M270X/M280X]";
             case 268592713: return "Bonaire [FirePro W5100]";
             case 268592720: return "Bonaire";
             case 268592721: return "Bonaire";
@@ -757,7 +775,7 @@ namespace pcil
             case 268593100: return "Ellesmere [Polaris10]";
             case 268593103: return "Ellesmere [Polaris10]";
             case 268593104: return "Ellesmere [Radeon Pro V7300X / V7350x2]";
-            case 268593119: return "Ellesmere [Radeon RX 470/480/570/570X/580/580X]";
+            case 268593119: return "Ellesmere [Radeon RX 470/480/570/570X/580/580X/590]";
             case 268593120: return "Baffin [Radeon Pro WX 4170]";
             case 268593121: return "Baffin [Polaris11]";
             case 268593123: return "Baffin [Radeon Pro WX 4100]";
@@ -788,7 +806,7 @@ namespace pcil
             case 268593192: return "Cape Verde PRO [FirePro W600]";
             case 268593193: return "Cape Verde";
             case 268593194: return "Venus PRO";
-            case 268593195: return "Venus LE / Tropo PRO-L [Radeon HD 8830M / R7 M465X]";
+            case 268593195: return "Cape Verde PRO / Venus LE / Tropo PRO-L [Radeon HD 8830M / R7 250 / R7 M465X]";
             case 268593196: return "Cape Verde GL [FirePro W4100]";
             case 268593197: return "Chelsea XT GL [FirePro M4000]";
             case 268593199: return "Chelsea LP [Radeon HD 7730M]";
@@ -874,6 +892,7 @@ namespace pcil
             case 268593570: return "Vega 12";
             case 268593571: return "Vega 12";
             case 268593583: return "Vega 12";
+            case 268595167: return "Polaris 20 XL [Radeon RX 580 2048SP]";
             case 268595215: return "RS100 AGP Bridge";
             case 268595216: return "RS200/RS250 AGP Bridge";
             case 268595456: return "R520 [Radeon X1800 XT]";
@@ -964,6 +983,7 @@ namespace pcil
             case 268595889: return "RV560 [Radeon X1650 XT] (Secondary)";
             case 268595891: return "RV560 [Radeon X1650 GT] (Secondary)";
             case 268595968: return "Fiji [Radeon R9 FURY / NANO Series]";
+            case 268595999: return "Navi 10";
             case 268597299: return "RS350 Host Bridge";
             case 268597300: return "RS350 [Radeon 9100 PRO/XT IGP]";
             case 268597301: return "RS350M [Mobility Radeon 9000 IGP]";
@@ -1173,11 +1193,11 @@ namespace pcil
             case 268605721: return "Trinity [Radeon HD 7500G]";
             case 268605728: return "Liverpool [Playstation 4 APU]";
             case 268605729: return "Liverpool HDMI/DP Audio Controller";
-            case 268605840: return "Trinity [Radeon HD 7520G]";
-            case 268605841: return "Trinity [Radeon HD 7540D]";
-            case 268605842: return "Trinity [Radeon HD 7420G]";
-            case 268605843: return "Trinity [Radeon HD 7480D]";
-            case 268605844: return "Trinity [Radeon HD 7400G]";
+            case 268605840: return "Trinity 2 [Radeon HD 7520G]";
+            case 268605841: return "Trinity 2 [Radeon HD 7540D]";
+            case 268605842: return "Trinity 2 [Radeon HD 7420G]";
+            case 268605843: return "Trinity 2 [Radeon HD 7480D]";
+            case 268605844: return "Trinity 2 [Radeon HD 7400G]";
             case 268605845: return "Richland [Radeon HD 8450G]";
             case 268605846: return "Richland [Radeon HD 8470D]";
             case 268605847: return "Richland [Radeon HD 8350G]";
@@ -1187,9 +1207,9 @@ namespace pcil
             case 268605851: return "Richland [Radeon HD 8310G]";
             case 268605852: return "Richland";
             case 268605853: return "Richland [Radeon HD 8550D]";
-            case 268605856: return "Trinity [Radeon HD 7520G]";
-            case 268605858: return "Trinity [Radeon HD 7420G]";
-            case 268605860: return "Trinity [Radeon HD 7400G]";
+            case 268605856: return "Trinity 2 [Radeon HD 7520G]";
+            case 268605858: return "Trinity 2 [Radeon HD 7420G]";
+            case 268605860: return "Trinity 2 [Radeon HD 7400G]";
             case 268610048: return "R600 HDMI Audio [Radeon HD 2900 GT/PRO/XT]";
             case 268610049: return "RV635 HDMI Audio [Radeon HD 3650/3730/3750]";
             case 268610056: return "RV630 HDMI Audio [Radeon HD 2600 PRO/XT / HD 3610]";
@@ -1212,6 +1232,7 @@ namespace pcil
             case 268610240: return "Tobago HDMI Audio [Radeon R7 360 / R9 360 OEM]";
             case 268610248: return "Hawaii HDMI Audio [Radeon R9 290/290X / 390/390X]";
             case 268610264: return "Tonga HDMI Audio [Radeon R9 285/380]";
+            case 268610272: return "Baffin HDMI/DP Audio [Radeon RX 550 640SP / RX 560/560X]";
             case 268610280: return "Fiji HDMI/DP Audio [Radeon R9 Nano / FURY/FURY X]";
             case 268610288: return "Ellesmere [Radeon RX 580]";
             case 268610560: return "Theater 600 Pro";
@@ -1599,10 +1620,13 @@ namespace pcil
             case 270680993: return "Hudson PCI to PCI bridge (PCIE port 1)";
             case 270680994: return "Hudson PCI to PCI bridge (PCIE port 2)";
             case 270680995: return "Hudson PCI to PCI bridge (PCIE port 3)";
+            case 270681008: return "X370 Series Chipset PCIe Upstream Port";
             case 270681009: return "X399 Series Chipset PCIe Bridge";
             case 270681012: return "300 Series Chipset PCIe Port";
+            case 270681013: return "X370 Series Chipset SATA Controller";
             case 270681014: return "X399 Series Chipset SATA Controller";
             case 270681015: return "300 Series Chipset SATA Controller";
+            case 270681017: return "X370 Series Chipset USB 3.1 xHCI Controller";
             case 270681018: return "X399 Series Chipset USB 3.1 xHCI Controller";
             case 270681019: return "300 Series Chipset USB 3.1 xHCI Controller";
             case 270692358: return "AMD-751 [Irongate] System Controller";
@@ -2272,10 +2296,19 @@ namespace pcil
             case 273481219: return "12C01A FireWire Host Controller";
             case 273514500: return "DTL-H2500 [Playstation development board]";
             case 273514505: return "CXD1947Q i.LINK Controller";
+            case 273514508: return "DTL-H800 [PS1 sound development board]";
             case 273514553: return "CXD3222 i.LINK Controller";
+            case 273514567: return "PS2 TOOL MRP";
             case 273514582: return "Rockwell HCF 56K modem";
             case 273514634: return "Memory Stick Controller";
+            case 273514751: return "PS2 Performance Analyzer";
+            case 273514826: return "PS2 Performance Analyzer";
+            case 273514883: return "ATHENS [PS3 prototype developer interface card]";
+            case 273514928: return "BM-1 [PSP TOOL Board Management Device]";
+            case 273514947: return "VO-4 [PSP TOOL Video Output Device]";
             case 273514958: return "SxS Pro memory card";
+            case 273515007: return "PS3 TOOL MRP";
+            case 273515022: return "CXD9208GP [PS3 PS2 emulation subsystem adapter]";
             case 273518684: return "SxS Pro memory card";
             case 273518719: return "SxS Pro+ memory card";
             case 273518735: return "Aeolia ACPI";
@@ -4770,6 +4803,7 @@ namespace pcil
             case 282988288: return "GF108 [GeForce GT 630]";
             case 282988289: return "GF108 [GeForce GT 620]";
             case 282988290: return "GF108 [GeForce GT 730]";
+            case 282988291: return "GF108 [GeForce GT 610]";
             case 282988294: return "GF108 [GeForce GT 730]";
             case 282988464: return "GM200 High Definition Audio";
             case 282988472: return "GP108 High Definition Audio Controller";
@@ -4892,6 +4926,7 @@ namespace pcil
             case 282988783: return "GP102 HDMI Audio Controller";
             case 282988784: return "GP104 High Definition Audio Controller";
             case 282988785: return "GP106 High Definition Audio Controller";
+            case 282988791: return "TU102 High Definition Audio Controller";
             case 282988864: return "GF117M [GeForce 610M/710M/810M/820M / GT 620M/625M/630M/720M]";
             case 282988928: return "GK104 [GeForce GTX 680]";
             case 282988930: return "GK104 [GeForce GTX 760 Ti]";
@@ -5077,12 +5112,14 @@ namespace pcil
             case 282990413: return "GM108M [GeForce MX130]";
             case 282990414: return "GM108M [GeForce MX110]";
             case 282990473: return "GM107GL [GRID M3-3020]";
-            case 282990492: return "NVIDIA GeForce 940MX";
+            case 282990492: return "GM107 [GeForce 940MX]";
             case 282990530: return "GM200 [GeForce GTX TITAN X]";
             case 282990536: return "GM200 [GeForce GTX 980 Ti]";
             case 282990576: return "GM200GL [Quadro M6000]";
             case 282990577: return "GM200GL [Quadro M6000 24GB]";
             case 282990589: return "GM200GL [Tesla M40]";
+            case 282991318: return "TU102 USB 3.1 Controller";
+            case 282991319: return "TU102 UCSI Controller";
             case 282991360: return "GP102 [TITAN X]";
             case 282991361: return "GP102";
             case 282991362: return "GP102 [TITAN Xp]";
@@ -5127,6 +5164,7 @@ namespace pcil
             case 282991648: return "GP106M [GeForce GTX 1060 Mobile]";
             case 282991649: return "GP106M [GeForce GTX 1050 Ti Mobile]";
             case 282991650: return "GP106M [GeForce GTX 1050 Mobile]";
+            case 282991651: return "GP106M [GeForce GTX 1060 Mobile Rev. 2]";
             case 282991664: return "GP106GL [Quadro P2000]";
             case 282991669: return "GP106";
             case 282991712: return "GP106BM [GeForce GTX 1060 Mobile 6GB]";
@@ -5159,23 +5197,35 @@ namespace pcil
             case 282991923: return "GP108GLM [Quadro P500 Mobile]";
             case 282992001: return "GV100 [TITAN V]";
             case 282992049: return "GV100GL [Tesla V100 SXM2 16GB]";
+            case 282992050: return "GV100 [Tesla V100-DGXS-16GB]";
             case 282992051: return "GV100GL [Tesla V100 FHHL 16GB]";
             case 282992052: return "GV100GL [Tesla V100 PCIe 16GB]";
             case 282992053: return "GV100GL [Tesla V100 SXM2 32GB]";
             case 282992054: return "GV100GL [Tesla V100 PCIe 32GB]";
             case 282992055: return "GV100GL [Tesla V100 DGXS 32GB]";
             case 282992058: return "GV100GL [Quadro GV100]";
-            case 282992130: return "TU102";
-            case 282992132: return "TU102";
-            case 282992135: return "TU102 [GeForce RTX 2080 Ti]";
-            case 282992176: return "TU102GL";
-            case 282992188: return "TU102GL [Quadro RTX 6000]";
+            case 282992130: return "TU102 [TITAN RTX]";
+            case 282992132: return "TU102 [GeForce RTX 2080 Ti]";
+            case 282992135: return "TU102 [GeForce RTX 2080 Ti Rev. A]";
+            case 282992173: return "TU102B";
+            case 282992174: return "TU102B";
+            case 282992176: return "TU102GL [Quadro RTX 6000]";
+            case 282992184: return "TU102GL";
+            case 282992188: return "TU102GL";
             case 282992189: return "TU102GL";
-            case 282992258: return "TU104";
-            case 282992263: return "TU104 [GeForce RTX 2080]";
+            case 282992190: return "TU102GL";
+            case 282992258: return "TU104 [GeForce RTX 2080]";
+            case 282992263: return "TU104 [GeForce RTX 2080 Rev. A]";
             case 282992299: return "TU104M [GeForce RTX 2080 Mobile]";
             case 282992302: return "TU104M";
-            case 282992391: return "TU106 [GeForce RTX 2070]";
+            case 282992304: return "TU104GL [Quadro RTX 5000]";
+            case 282992305: return "TU104GL [Quadro RTX 4000]";
+            case 282992312: return "TU104GL [Tesla T4]";
+            case 282992386: return "TU106 [GeForce RTX 2070]";
+            case 282992388: return "TU106";
+            case 282992391: return "TU106 [GeForce RTX 2070 Rev. A]";
+            case 282992392: return "TU106";
+            case 282992514: return "TU107";
             case 283051808: return "OneConnect NIC (Skyhawk)";
             case 283051810: return "OneConnect iSCSI Initiator (Skyhawk)";
             case 283051811: return "OneConnect iSCSI Initiator + Target (Skyhawk)";
@@ -5195,6 +5245,7 @@ namespace pcil
             case 283107936: return "OneConnect FCoE Initiator (Lancer)";
             case 283107944: return "OneConnect 10Gb FCoE Converged Network Adapter (Lancer-VF)";
             case 283108096: return "Lancer Gen6: LPe32000 Fibre Channel Host Adapter";
+            case 283108147: return "Lancer Gen6: LPe32000 Fibre Channel Host Adapter";
             case 283111441: return "Saturn: LightPulse Fibre Channel Host Adapter";
             case 283111445: return "Saturn: LightPulse Fibre Channel Host Adapter";
             case 283111557: return "LP850 Fibre Channel Host Adapter";
@@ -5374,6 +5425,7 @@ namespace pcil
             case 284093424: return "SED Systems Modulator/Demodulator";
             case 284093425: return "SED Systems Audio Interface Card";
             case 284093426: return "SED Systems Common PCI Interface";
+            case 284093427: return "SED Systems PCIe-AXI Bridge";
             case 284131668: return "M815x Token Ring Adapter";
             case 284239973: return "Tyan Thunder K8E S2865";
             case 284250880: return "Tyan S5380 Mainboard";
@@ -6109,6 +6161,7 @@ namespace pcil
             case 288817265: return "VIC SR-IOV VF";
             case 288817274: return "VIC 1300 PCIe Upstream Port";
             case 288817359: return "VIC Userspace NIC";
+            case 288817726: return "1GigE I350 LOM";
             case 288917765: return "8905 [STD 32 Bridge]";
             case 288948225: return "VGA Compatible 3D Graphics";
             case 289144832: return "PCI-9060 i960 Bridge";
@@ -6295,6 +6348,7 @@ namespace pcil
             case 293142786: return "Extended IDE Controller";
             case 293142787: return "EX-IDE Type-B";
             case 293142799: return "NVMe Controller";
+            case 293142800: return "NVMe SSD Controller Cx5";
             case 293142805: return "XG4 NVMe SSD Controller";
             case 293143556: return "DVD Decoder card";
             case 293143558: return "Tecra Video Capture device";
@@ -6633,6 +6687,7 @@ namespace pcil
             case 301495172: return "PM7384 [FREEDM - 84P672 Frm Engine & Datalink Mgr]";
             case 301498368: return "PM8000";
             case 301498377: return "PM8009 SPCve 8x6G";
+            case 301498392: return "PM8018 Adaptec SAS Adaptor ASA-70165H PCIe Gen3 x8 6 Gbps 16-lane 4x SFF-8644";
             case 301498418: return "PM8032 Tachyon QE8";
             case 301498451: return "PM8053 SXP 12G 24-port SAS/SATA expander";
             case 301498452: return "PM8054 SXP 12G 36-port SAS/SATA expander";
@@ -7467,9 +7522,10 @@ namespace pcil
             case 335419135: return "PCI-16xx series PCI multiport serial board (function 1: RX/TX steering CPLD)";
             case 335419153: return "PCI-1711 16-channel data acquisition card 12-bit, 100kS/s";
             case 335419187: return "PCI-1733 32-channel isolated digital input card";
-            case 335419218: return "PCI-1752";
-            case 335419220: return "PCI-1754";
-            case 335419222: return "PCI-1756";
+            case 335419188: return "PCI-1734 32-channel isolated digital output card";
+            case 335419218: return "PCI-1752 64-channel Isolated Digital Output Card";
+            case 335419220: return "PCI-1754 64-channel Isolated Digital Input Card";
+            case 335419222: return "PCI-1756 64-ch Isolated Digital I/O PCI Card";
             case 335463170: return "MIOe-3680 2-Port CAN-Bus MIOe Module with Isolation Protection";
             case 335549441: return "9432 TX";
             case 335676976: return "ME-630";
@@ -8173,6 +8229,7 @@ namespace pcil
             case 337993863: return "T6225-6087 Unified Wire Ethernet Controller";
             case 337993864: return "T62100-6088 Unified Wire Ethernet Controller";
             case 337993865: return "T62100-6089 Unified Wire Ethernet Controller";
+            case 337993866: return "T62100-608a Unified Wire Ethernet Controller";
             case 337994753: return "T6225-CR Unified Wire Ethernet Controller";
             case 337994754: return "T6225-SO-CR Unified Wire Ethernet Controller";
             case 337994755: return "T6425-CR Unified Wire Ethernet Controller";
@@ -8196,6 +8253,7 @@ namespace pcil
             case 337994887: return "T6225-6087 Unified Wire Ethernet Controller";
             case 337994888: return "T62100-6088 Unified Wire Ethernet Controller";
             case 337994889: return "T62100-6089 Unified Wire Ethernet Controller";
+            case 337994890: return "T62100-608a Unified Wire Ethernet Controller";
             case 337995009: return "T6225-CR Unified Wire Storage Controller";
             case 337995010: return "T6225-SO-CR Unified Wire Storage Controller";
             case 337995011: return "T6425-CR Unified Wire Storage Controller";
@@ -8219,6 +8277,7 @@ namespace pcil
             case 337995143: return "T6225-6087 Unified Wire Storage Controller";
             case 337995144: return "T62100-6088 Unified Wire Storage Controller";
             case 337995145: return "T62100-6089 Unified Wire Storage Controller";
+            case 337995146: return "T62100-608a Unified Wire Storage Controller";
             case 337995265: return "T6225-CR Unified Wire Storage Controller";
             case 337995266: return "T6225-SO-CR Unified Wire Storage Controller";
             case 337995267: return "T6425-CR Unified Wire Storage Controller";
@@ -8242,6 +8301,7 @@ namespace pcil
             case 337995399: return "T6225-6087 Unified Wire Storage Controller";
             case 337995400: return "T62100-6088 Unified Wire Storage Controller";
             case 337995401: return "T62100-6089 Unified Wire Storage Controller";
+            case 337995402: return "T62100-608a Unified Wire Storage Controller";
             case 337995777: return "T6225-CR Unified Wire Ethernet Controller [VF]";
             case 337995778: return "T6225-SO-CR Unified Wire Ethernet Controller [VF]";
             case 337995779: return "T6425-CR Unified Wire Ethernet Controller [VF]";
@@ -8265,6 +8325,7 @@ namespace pcil
             case 337995911: return "T6225-6087 Unified Wire Ethernet Controller [VF]";
             case 337995912: return "T62100-6088 Unified Wire Ethernet Controller [VF]";
             case 337995913: return "T62100-6089 Unified Wire Ethernet Controller [VF]";
+            case 337995914: return "T62100-608a Unified Wire Ethernet Controller [VF]";
             case 338010112: return "PE10K Unified Wire Ethernet Controller";
             case 338575392: return "VM2-2 [Video Maker 2] MPEG1/2 Encoder";
             case 338576183: return "VM2-2-C7 [Video Maker 2 rev. C7] MPEG1/2 Encoder";
@@ -8379,6 +8440,9 @@ namespace pcil
             case 349364225: return "VScom 010HV2 1 port parallel adaptor";
             case 349364240: return "VScom 100HV2 1 port serial adaptor";
             case 349364256: return "VScom 200HV2 2 port serial adaptor";
+            case 349372418: return "DTL-T14000 Rev. 1 [PS2 TOOL CD/DVD Emulator]";
+            case 349372419: return "DTL-T14000 Rev. 2 [PS2 TOOL CD/DVD Emulator]";
+            case 349372420: return "DTL-T14000 Rev. 3 [PS2 TOOL CD/DVD Emulator]";
             case 349593857: return "ACS-61xxx, PCIe to SAS/SATA RAID HBA";
             case 349594113: return "ACS-62xxx, External PCIe to SAS/SATA RAID controller";
             case 349765648: return "AP1011/SP1011 HyperTransport-PCI Bridge [Sturgeon]";
@@ -8449,7 +8513,7 @@ namespace pcil
             case 350492252: return "NetXtreme BCM5724 Gigabit Ethernet PCIe";
             case 350492253: return "NetXtreme BCM5705M Gigabit Ethernet";
             case 350492254: return "NetXtreme BCM5705M_2 Gigabit Ethernet";
-            case 350492255: return "NetXtreme BCM5720 Gigabit Ethernet PCIe";
+            case 350492255: return "NetXtreme BCM5720 2-port Gigabit Ethernet PCIe";
             case 350492258: return "NetXtreme II BCM57712 10 Gigabit Ethernet";
             case 350492259: return "NetXtreme II BCM57712 10 Gigabit Ethernet Multi Function";
             case 350492261: return "NetXtreme BCM5717 Gigabit Ethernet PCIe";
@@ -9039,6 +9103,7 @@ namespace pcil
             case 364249109: return "ZBox";
             case 364322817: return "Skyhawk Series NVME SSD";
             case 364335105: return "WD Black NVMe SSD";
+            case 364335106: return "WD Black 2018/PC SN720 NVMe SSD";
             case 364384257: return "APCI1516 SP controller (16 digi outputs)";
             case 364384259: return "APCI1032 SP controller (32 digi inputs w/ opto coupler)";
             case 364384260: return "APCI2032 SP controller (32 digi outputs)";
@@ -9292,6 +9357,8 @@ namespace pcil
             case 383075155: return "PMC-DX2003 Reconfigurable FPGA with TTL and Differential I/O";
             case 383075159: return "PMC-DX502 Reconfigurable Differential I/O Module";
             case 383075415: return "PMC730, APC730, AcPC730 Multifunction Module";
+            case 383075441: return "XMC730 Multi-function I/O module with front I/O";
+            case 383075443: return "XMC730CC Multi-function I/O module with rear I/O Conduction-cooled";
             case 383075917: return "PMC408 32-Channel Digital Input/Output Module";
             case 383076432: return "PMC220-16 12-Bit Analog Output Module";
             case 383076930: return "PMC483, APC483, AcPC483 Counter Timer Module";
@@ -9390,6 +9457,13 @@ namespace pcil
             case 390406400: return "XCode 2100 Series";
             case 392167681: return "PCD-7004 Digital Bi-Directional Ports PCI Card";
             case 392167682: return "PCD-7104 Digital Input & Output PCI Card";
+            case 392167713: return "PCT-7303A PC card with IRC counters";
+            case 392167714: return "PCT-7408A PC card with counters and timers";
+            case 392167715: return "PCT-7424 PCI card with standard counters";
+            case 392167956: return "PCT-7424C (F0) PC card with standard counters";
+            case 392167957: return "PCT-7424C (F1) PC card with standard counters";
+            case 392167958: return "PCT-7424E (F0) PC card with standard counters";
+            case 392167959: return "PCT-7424E (F1) PC card with standard counters";
             case 392168195: return "PCD-7006C Digital Input & Output PCI Card";
             case 394067969: return "Nitrox XL N1";
             case 394067971: return "Nitrox XL N1 Lite";
@@ -9802,6 +9876,7 @@ namespace pcil
             case 421796611: return "XtremeScale SFC9250 10/25/40/50/100G Ethernet Controller (Virtual Function)";
             case 421816067: return "SFC4000 rev A iSCSI/Onload [Solarstorm]";
             case 421839105: return "EF1-21022T [EtherFabric]";
+            case 422182920: return "RAMPART";
             case 422641676: return "Qualcomm MSM6275 UMTS chip";
             case 423559169: return "AHA36x-PCIX";
             case 423560032: return "AHA360-PCIe";
@@ -9941,6 +10016,8 @@ namespace pcil
             case 426377474: return "NodalCore C-2000 Content Classification Accelerator";
             case 426377477: return "NodalCore C-3000 Content Classification Accelerator";
             case 426840081: return "Physics Processing Unit [PhysX]";
+            case 427032585: return "FlexCard PMC-II";
+            case 427032593: return "FlexCard PMC-II Ethernet";
             case 427491920: return "JMC250 PCI Express Gigabit Ethernet Controller";
             case 427491936: return "JMC260 PCI Express Fast Ethernet Controller";
             case 427492200: return "JMB368 IDE controller";
@@ -10155,8 +10232,20 @@ namespace pcil
             case 455151682: return "ASM1042 SuperSpeed USB Host Controller";
             case 455151744: return "ASM1083/1085 PCIe to PCI Bridge";
             case 455151938: return "ASM1042A USB 3.0 Host Controller";
+            case 455152004: return "ASM1184e PCIe Switch Port";
             case 455152194: return "ASM1142 USB 3.1 Host Controller";
             case 455152451: return "ASM1143 USB 3.1 Host Controller";
+            case 455156034: return "ASM2142 USB 3.1 Host Controller";
+            case 455524658: return "COMBO-LXT155";
+            case 455524800: return "NFB-100G1-e0";
+            case 455524801: return "NFB-100G1-e1";
+            case 455524944: return "NFB-200G2-master";
+            case 455524945: return "NFB-200G2-slave";
+            case 455525056: return "NFB-100G2-e0";
+            case 455525057: return "NFB-100G2-e1";
+            case 455527200: return "COMBO-20G";
+            case 455527232: return "COMBO-40G";
+            case 455527296: return "NFB-40G2";
             case 456523777: return "QEMU PCI-PCI bridge";
             case 456523778: return "QEMU PCI 16550A Adapter";
             case 456523779: return "QEMU PCI Dual-port 16550A Adapter";
@@ -10184,6 +10273,7 @@ namespace pcil
             case 456589343: return "DSU";
             case 456589344: return "ADQ14";
             case 456589347: return "ADQ7";
+            case 456589350: return "ADQ8";
             case 456597524: return "TX320";
             case 456597529: return "S6000";
             case 456720385: return "S1120 PCIe Accelerator SSD";
@@ -10293,6 +10383,7 @@ namespace pcil
             case 475529219: return "Ultrastar SN100 Series NVMe SSD";
             case 475529251: return "Ultrastar SN200 Series NVMe SSD";
             case 475796099: return "PC300 NVMe Solid State Drive";
+            case 475796740: return "SC300 512GB M.2 2280 SATA Solid State Drive";
             case 475989312: return "PBlaze4 NVMe SSD";
             case 476250120: return "K1927BB1Ya [EC8430] Angara Interconnection Network Adapter";
             case 478020096: return "zFAS Debug Port";
@@ -10440,6 +10531,7 @@ namespace pcil
             case 496269579: return "FCH SMBus Controller";
             case 496269582: return "FCH LPC Bridge";
             case 496304129: return "Colossus GC2 [C2]";
+            case 496304130: return "Colossus GC1 [S1]";
             case 499057665: return "StarDragon4800 PCI Express Root Port";
             case 501285777: return "TRM-S1040 [DC-315 / DC-395 series]";
             case 501293088: return "DC-390";
@@ -10447,18 +10539,22 @@ namespace pcil
             case 501341225: return "DC290";
             case 501551104: return "IO Memory Controller";
             case 501555200: return "NoLoad Hardware Development Kit";
-            case 502259717: return "Skylark PCI Express Root Port 0 [eMAG]";
-            case 502259718: return "Skylark PCI Express Root Port 1 [eMAG]";
-            case 502259719: return "Skylark PCI Express Root Port 2 [eMAG]";
-            case 502259720: return "Skylark PCI Express Root Port 3 [eMAG]";
-            case 502259721: return "Skylark PCI Express Root Port 4 [eMAG]";
-            case 502259722: return "Skylark PCI Express Root Port 5 [eMAG]";
-            case 502259723: return "Skylark PCI Express Root Port 6 [eMAG]";
-            case 502259724: return "Skylark PCI Express Root Port 7 [eMAG]";
+            case 502259717: return "eMAG PCI Express Root Port 0";
+            case 502259718: return "eMAG PCI Express Root Port 1";
+            case 502259719: return "eMAG PCI Express Root Port 2";
+            case 502259720: return "eMAG PCI Express Root Port 3";
+            case 502259721: return "eMAG PCI Express Root Port 4";
+            case 502259722: return "eMAG PCI Express Root Port 5";
+            case 502259723: return "eMAG PCI Express Root Port 6";
+            case 502259724: return "eMAG PCI Express Root Port 7";
             case 502726657: return "ml605";
             case 502726658: return "alst4";
             case 502726659: return "alst4x";
             case 503058817: return "TDM 8 Port E1/T1/J1 Adapter";
+            case 505676033: return "Acorn CLE-101";
+            case 505676309: return "Acorn CLE-215";
+            case 505676319: return "Acorn CLE-215+";
+            case 505681189: return "Xilinx BCU-1525";
             case 532677376: return "E2200 Dual E1/Rawpipe Card";
             case 532677377: return "C5400 SHDSL/E1 Card";
             case 532742157: return "IBA6110 InfiniBand HCA";
@@ -10823,7 +10919,7 @@ namespace pcil
             case 1395888386: return "86C410 [Savage 2000]";
             case 1395902976: return "SonicVibes";
             case 1414267728: return "TL880-based HDTV/ATSC tuner";
-            case 1414357368: return "DVB-S2 4 Tuner PCIe Card";
+            case 1414357368: return "DVB Tuner PCIe Card";
             case 1414673475: return "RTC4";
             case 1414874200: return "S5933";
             case 1430519809: return "I-30xx Scanner Interface";
@@ -10836,6 +10932,7 @@ namespace pcil
             case 1481883648: return "Citrix XenServer PCI Device for Windows Update";
             case 1481883920: return "Virtualized HID";
             case 1481883975: return "Virtualized Graphics Device";
+            case 1481884160: return "XCP-ng Project PCI Device for Windows Update";
             case 1662785106: return "PXI-1652 Signal Generator";
             case 1662788868: return "PXI-2504 Signal Interrogator";
             case 1668573043: return "GPPCI";
@@ -11650,6 +11747,9 @@ namespace pcil
             case 2156270985: return "Ethernet Controller X710/X557-AT 10GBASE-T";
             case 2156270986: return "Ethernet Controller XXV710 for 25GbE backplane";
             case 2156270987: return "Ethernet Controller XXV710 for 25GbE SFP28";
+            case 2156270993: return "Ethernet Controller E810-C for backplane";
+            case 2156270994: return "Ethernet Controller E810-C for QSFP";
+            case 2156270995: return "Ethernet Controller E810-C for SFP";
             case 2156271008: return "Ethernet Connection (2) I218-LM";
             case 2156271009: return "Ethernet Connection (2) I218-V";
             case 2156271010: return "Ethernet Connection (3) I218-LM";
@@ -13000,6 +13100,20 @@ namespace pcil
             case 2156277758: return "Xeon E7 v3/Xeon E5 v3/Core i7 System Address Decoder & Broadcast Registers";
             case 2156278117: return "Wireless 3165";
             case 2156278118: return "Dual Band Wireless-AC 3165 Plus Bluetooth";
+            case 2156278148: return "UHD Graphics 605";
+            case 2156278156: return "Celeron/Pentium Silver Processor Dynamic Platform and Thermal Framework Processor Participant";
+            case 2156278158: return "Celeron/Pentium Silver Processor NorthPeak";
+            case 2156278170: return "Celeron/Pentium Silver Processor Trusted Execution Engine Interface";
+            case 2156278188: return "Celeron/Pentium Silver Processor Serial IO I2C Host Controller";
+            case 2156278190: return "Celeron/Pentium Silver Processor Serial IO I2C Host Controller";
+            case 2156278204: return "Celeron/Pentium Silver Processor Serial IO UART Host Controller";
+            case 2156278206: return "Celeron/Pentium Silver Processor Serial IO UART Host Controller";
+            case 2156278208: return "Celeron/Pentium Silver Processor Serial IO UART Host Controller";
+            case 2156278210: return "Celeron/Pentium Silver Processor Serial IO SPI Host Controller";
+            case 2156278212: return "Celeron/Pentium Silver Processor Serial IO SPI Host Controller";
+            case 2156278214: return "Celeron/Pentium Silver Processor Serial IO SPI Host Controller";
+            case 2156278228: return "Celeron/Pentium Silver Processor Gaussian Mixture Model";
+            case 2156278254: return "Celeron/Pentium Silver Processor Serial IO UART Host Controller";
             case 2156278272: return "GD31244 PCI-X SATA HBA";
             case 2156278544: return "IOP348 I/O Processor";
             case 2156278547: return "IOP348 I/O Processor (SL8e) in IOC Mode SAS/SATA";
@@ -13511,8 +13625,14 @@ namespace pcil
             case 2156288278: return "HD Graphics 620";
             case 2156288279: return "UHD Graphics 620";
             case 2156288280: return "Xeon E3-1200 v6/7th Gen Core Processor Host Bridge/DRAM Registers";
+            case 2156288283: return "HD Graphics 630";
+            case 2156288284: return "UHD Graphics 615";
             case 2156288285: return "HD Graphics P630";
+            case 2156288286: return "HD Graphics 615";
             case 2156288287: return "Xeon E3-1200 v6/7th Gen Core Processor Host Bridge/DRAM Registers";
+            case 2156288291: return "HD Graphics 635";
+            case 2156288294: return "Iris Plus Graphics 640";
+            case 2156288295: return "Iris Plus Graphics 650";
             case 2156288644: return "Celeron N3350/Pentium N4200/Atom E3900 Series Integrated Graphics Controller";
             case 2156288648: return "Celeron N3350/Pentium N4200/Atom E3900 Series Imaging Unit";
             case 2156288664: return "Celeron N3350/Pentium N4200/Atom E3900 Series Audio Cluster";
@@ -13809,6 +13929,7 @@ namespace pcil
             case 2156299494: return "460GX - 82466GX Wide and fast PCI eXpander Bridge (WXB)";
             case 2156299498: return "460GX - 84460GX AGP Bridge (GXB function 1)";
             case 2156299520: return "IXP4XX Network Processor (IXP420/421/422/425/IXC1100)";
+            case 2156300224: return "UHD Graphics 617";
             case 2156300288: return "Platform Controller Hub EG20T PCI Express Port";
             case 2156300289: return "Platform Controller Hub EG20T Packet Hub";
             case 2156300290: return "Platform Controller Hub EG20T Gigabit Ethernet Controller";
@@ -14382,6 +14503,7 @@ namespace pcil
             case 2156307272: return "Cannon Lake PCH cAVS";
             case 2156307282: return "Cannon Lake PCH SATA AHCI Controller";
             case 2156307296: return "Cannon Lake PCH HECI Controller";
+            case 2156307299: return "Cannon Lake PCH Active Management Technology - SOL";
             case 2156307309: return "Cannon Lake PCH USB 3.1 xHCI Host Controller";
             case 2156307311: return "Cannon Lake PCH Shared SRAM";
             case 2156307312: return "Wireless-AC 9560 [Jefferson Peak]";
@@ -14827,7 +14949,7 @@ namespace pcil
         }
     }
     
-    inline constexpr const char* vendorLookup(uint16_t vendorId)
+    inline constexpr const char* vendorLookup(std::uint16_t vendorId)
     {
         switch(vendorId)
         {
@@ -16576,8 +16698,9 @@ namespace pcil
             case 6505: return "Qualcomm Atheros";
             case 6506: return "Sensory Networks Inc.";
             case 6509: return "Club-3D BV";
+            case 6510: return "PNY";
             case 6513: return "AGEIA Technologies, Inc.";
-            case 6516: return "Eberspaecher Electronics";
+            case 6516: return "Star Electronics GmbH & Co. KG";
             case 6518: return "TRENDnet";
             case 6519: return "Parsec";
             case 6523: return "JMicron Technology Corp.";
@@ -16668,6 +16791,7 @@ namespace pcil
             case 6931: return "Jaton Corp";
             case 6938: return "K&F Computing Research Co.";
             case 6945: return "ASMedia Technology Inc.";
+            case 6950: return "Netcope Technologies, a.s.";
             case 6956: return "Opal-RT Technologies Inc.";
             case 6966: return "Red Hat, Inc.";
             case 6967: return "Signal Processing Devices Sweden AB";
@@ -16727,6 +16851,7 @@ namespace pcil
             case 7383: return "Nanjing Magewell Electronics Co., Ltd.";
             case 7389: return "secunet Security Networks AG";
             case 7396: return "Exablaze";
+            case 7408: return "Akitio";
             case 7415: return "Subspace Dynamics";
             case 7424: return "Pure Storage";
             case 7429: return "Tongfang Hongkong Limited";
@@ -16749,6 +16874,7 @@ namespace pcil
             case 7538: return "Xiaomi";
             case 7544: return "DERA";
             case 7548: return "Aerotech, Inc.";
+            case 7554: return "NETINT Technologies Inc.";
             case 7559: return "Fuzhou Rockchip Electronics Co., Ltd";
             case 7567: return "Enyx";
             case 7572: return "Chengdu Higon IC Design Co.Ltd";
@@ -16762,6 +16888,7 @@ namespace pcil
             case 7663: return "Ampere Computing, LLC";
             case 7671: return "opencpi.org";
             case 7676: return "JSC NT-COM";
+            case 7716: return "Squirrels Research Labs";
             case 8128: return "Ascom (Finland) Oy";
             case 8129: return "QLogic, Corp.";
             case 8137: return "Tehuti Networks Ltd.";
