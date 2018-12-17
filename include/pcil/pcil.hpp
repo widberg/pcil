@@ -24,8 +24,8 @@
 // This header was generated with pcil v1.0.0 by ProWolf
 // https://github.com/prowolf/pcil
 
-#ifndef PCIL_H
-#define PCIL_H
+#ifndef PCIL_HPP
+#define PCIL_HPP
 
 #include <cstdint>
 
@@ -17128,4 +17128,4 @@ namespace pcil
     }
 }
 
-#endif // PCIL_H
+#endif // PCIL_HPP
