@@ -4,6 +4,4 @@ project(pcil VERSION 1.0.0)
 
 add_library(pcil INTERFACE)
 
-target_sources(pcil INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/include/pcil/pcil.hpp)
-
 target_include_directories(pcil INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/include)
