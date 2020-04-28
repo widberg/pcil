@@ -1,6 +1,6 @@
 // MIT License
 //
-// Copyright (c) 2018 ProWolf
+// Copyright (c) 2018-2020 widberg
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -21,8 +21,8 @@
 // SOFTWARE.
 //
 // This file was generated with a script.
-// This header was generated with pcil v1.0.0 by ProWolf
-// https://github.com/prowolf/pcil
+// This header was generated with pcil v1.0.0 by widberg
+// https://github.com/widberg/pcil
 
 #ifndef PCIL_HPP
 #define PCIL_HPP

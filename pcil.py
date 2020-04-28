@@ -1,6 +1,6 @@
 # MIT License
 #
-# Copyright (c) 2018 ProWolf
+# Copyright (c) 2018-2020 widberg
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -20,8 +20,8 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 #
-# pcil v1.0.0 by ProWolf
-# https://github.com/prowolf/pcil
+# pcil v1.0.0 by widberg
+# https://github.com/widberg/pcil
 
 from argparse import ArgumentParser
 from urllib.request import urlretrieve
@@ -71,7 +71,7 @@ if __name__ == '__main__':
     with open(header_path, "w", encoding="utf8") as header_file:
         header_file.write("""// MIT License
 //
-// Copyright (c) 2018 ProWolf
+// Copyright (c) 2019 widberg
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -92,8 +92,8 @@ if __name__ == '__main__':
 // SOFTWARE.
 //
 // This file was generated with a script.
-// This header was generated with pcil v1.0.0 by ProWolf
-// https://github.com/prowolf/pcil
+// This header was generated with pcil v1.0.0 by widberg
+// https://github.com/widberg/pcil
 
 #ifndef PCIL_HPP
 #define PCIL_HPP
